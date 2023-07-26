@@ -25,6 +25,7 @@ public class BankBookController {
 	public String getList(Pager pager, Model model)throws Exception{
 		List<BankBookDTO> ar = bankBookService.getList(pager);
 		model.addAttribute("list", ar);
+		model.addAttribute("pager", pager);
 		return "bankbook/list";
 	}
 	
