@@ -13,6 +13,7 @@ public class MemberDTO {
 	private String email;
 	private Date birth;
 	
+	
 	public String getId() {
 		return id;
 	}
