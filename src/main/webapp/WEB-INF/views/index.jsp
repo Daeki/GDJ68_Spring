@@ -61,5 +61,7 @@
 	<c:if test="${empty member}">
 		<h1>비로그인 상태</h1>
 	</c:if>
+	
+	<img alt="" src="/resources/upload/member/img1.jpeg">
 </body>
 </html>
