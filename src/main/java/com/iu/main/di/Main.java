@@ -10,7 +10,8 @@ public class Main {
 		
 		
 		Arm arm = new Arm();
-		Robot robot = new Robot(arm);
+		Robot robot = null;
+		int a=10;
 		
 		robot.setArm(arm);
 		
