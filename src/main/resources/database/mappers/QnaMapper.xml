@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.iu.main.board.qna.QnaDAO">
+	<select id="getList" resultMap="getSelectResult" parameterType="Pager">
+	  		SELECT 
+	  			*
+			FROM(
+				SELECT 
+					ROWNUM R, 
+					B.* 
+				FROM(
+					SELECT
+						* 
+					FROM 
+						QNABOARD
+					WHERE 
+						QNANUM>0 
+					ORDER BY 
+						QNANUM DESC
+					) B
+				)
+			WHERE
+				R BETWEEN #{startRow} AND #{lastRow}
+	  	</select>
+  	
+	  	<resultMap type="QnaDTO" id="getSelectResult">
+	  		<id column="QNANUM" property="num"/>
+	  		<result column="QNASUBJECT" property="subject"/>
+  			<result column="QNANAME" property="name"/>
+	  		<result column="QNACONTENTS" property="contents"/>
+	  		<result column="QNADATE" property="createDate"/>
+	  		<result column="QNAHIT" property="hit"/>
+	  		
+	  	</resultMap>
+	  	
+	  	<insert id="setAdd" parameterType="QnaDTO">
+	  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+	  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+	  		</selectKey>
+	  	
+	  		INSERT INTO QNABOARD (QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
+	  		VALUES (#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, 0, 0, 0)
+	  	
+	  	</insert>
+	  	
+	  	
+	  	
+	  	
+	  	
+	  	
+  </mapper>
