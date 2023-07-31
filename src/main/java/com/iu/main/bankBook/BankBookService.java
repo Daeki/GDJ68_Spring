@@ -56,6 +56,11 @@ public class BankBookService {
 		int result =bankBookDAO.setAdd(bankBookDTO);
 		
 		for(MultipartFile multipartFile: files) {
+			
+			if(multipartFile.isEmpty()) {
+				continue;
+			}
+			
 			String fileName=fileManager.fileSave(path, session, multipartFile);
 			BankBookFileDTO bankBookFileDTO = new BankBookFileDTO();
 			bankBookFileDTO.setOriginalName(multipartFile.getOriginalFilename());
