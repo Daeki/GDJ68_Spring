@@ -26,7 +26,7 @@ public class QnaDAO implements BoardDAO{
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(NAMESPACE+"getDetail", boardDTO);
 	}
 
 	@Override
@@ -50,7 +50,7 @@ public class QnaDAO implements BoardDAO{
 	@Override
 	public Long getTotal(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		return session.selectOne(NAMESPACE+"getTotal", pager);
 	}
 
 	@Override

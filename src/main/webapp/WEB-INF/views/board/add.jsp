@@ -14,33 +14,54 @@
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
-<section class="container mt-5">
-		<h1 class="mb-3">NoticeAdd Page</h1>
+	<div class="container-fluid">
+	
+		<div class="row justify-content-center my-4">
+			<h1 class="col-md-7 text-center">${board} Add Page</h1>
+		</div>
 		
-		<form class="col-md-4 ms-auto" action="./add" method="post" enctype="multipart/form-data">
-			<div class="row g-3 align-items-center">
-				<label for="noticeSubject" class="col-form-label">제목</label>
-				<input type="text" class="form-control" id="noticeSubject"  name="subject" placeholder="제목을 입력하세요"><br>
-			</div>
-			
-			<div class="row g-3 align-items-center">
-				<label for="noticeName" class="col-form-label mt-5">작성자</label>
-				<input type="text" class="form-control" id="noticeName"  name="name" placeholder="작성자를 입력하세요"><br> 
-			</div>
-			
-			<div class="row g-3 align-items-center">
-				<label for="noticeContents" class="col-form-label mt-5">내용</label>
-				<input type="textarea" class="form-control" id="noticeContents"  name="contents" placeholder="내용을 입력하세요"><br> 
-			</div>
-			
+		<div class="row justify-content-center my-4">
+			<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
+				<div class="mb-3">
+				  <label for="writer" class="form-label">작성자</label>
+				  <input type="text" name="name" readonly value="${member.id}" class="form-control" id="writer">
+				</div>
+				
+				<div class="mb-3">
+				  <label for="title" class="form-label">제목</label>
+				  <input type="text" name="subject" class="form-control" id="title" placeholder="제목 입력">
+				</div>
 		
+				<div class="mb-3">
+				  <label for="contents" class="form-label">내용</label>
+				  <textarea name="contents" class="form-control" id="contents" placeholder="내용 입력" rows="7"></textarea>
+				</div>
+				
+				<div id="fileList" class="my-5">
+					<div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">
+					</div>
+					<div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">
+					</div>					
+					<div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">
+					</div>
+					<div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">
+					</div>
+					<div class="input-group mb-3">
+						<input type="file" class="form-control" id="photos" name="photos">
+					</div>					
+	
+				</div>
+							
+				<div class="mb-3">
+					<button class="my btn btn-danger" type="submit">글쓰기</button>
+				</div>
 			
-			
-			<button type="submit" class="btn btn-success mt-5 me-3">글쓰기</button>
-			<button type="reset" class="btn btn-success mt-5">다시입력</button>
-			
-			
-		</form>
-	</section>
+			</form>
+		</div>
+	</div>
 </body>
 </html>

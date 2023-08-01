@@ -4,6 +4,29 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
   <mapper namespace="com.iu.main.board.qna.QnaDAO">
+    	<sql id="searchSql">
+	  		WHERE QNANUM>0 
+							
+			<choose>
+				<when test="kind=='subject'">
+					AND QNASUBJECT LIKE '%'||#{search}||'%'
+				</when>
+				
+				<when test="kind=='contents'">
+					AND QNACONTENTS LIKE '%'||#{search}||'%'
+				</when>
+				
+				<otherwise>
+					AND QNANAME LIKE '%'||#{search}||'%'	
+				</otherwise>
+			</choose>
+  		</sql>
+  	
+  	<select id="getTotal" resultType="Long" parameterType="Pager">
+  		SELECT COUNT(QNANUM) FROM QNABOARD 
+  		<include refid="searchSql"></include>
+  	</select>
+  
 	<select id="getList" resultMap="getSelectResult" parameterType="Pager">
 	  		SELECT 
 	  			*
@@ -16,14 +39,25 @@
 						* 
 					FROM 
 						QNABOARD
-					WHERE 
-						QNANUM>0 
+					
+					<include refid="searchSql"></include>
+						
 					ORDER BY 
 						QNANUM DESC
 					) B
 				)
 			WHERE
 				R BETWEEN #{startRow} AND #{lastRow}
+	  	</select>
+	  	
+	  	<select id="getDetail" parameterType="QnaDTO" resultMap="QnaDTO">
+	  		SELECT * FROM QNABOARD WHERE QNANUM=#{num}
+<!-- 	  		SELECT Q.*, QF.*
+	  		FROM QNABOARD Q
+	  			 LEFT JOIN
+	  			 QNAFILE QF
+	  			 on Q.QNANUM=QF.QNANUM
+	  		WHERE Q.QNANUM=#{num} -->
 	  	</select>
   	
 	  	<resultMap type="QnaDTO" id="getSelectResult">
@@ -34,6 +68,8 @@
 	  		<result column="QNADATE" property="createDate"/>
 	  		<result column="QNAHIT" property="hit"/>
 	  		
+	  		
+	  		
 	  	</resultMap>
 	  	
 	  	<insert id="setAdd" parameterType="QnaDTO">
@@ -42,7 +78,7 @@
 	  		</selectKey>
 	  	
 	  		INSERT INTO QNABOARD (QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
-	  		VALUES (#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, 0, 0, 0)
+	  		VALUES (#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, #{num}, 0, 0)
 	  	
 	  	</insert>
 	  	

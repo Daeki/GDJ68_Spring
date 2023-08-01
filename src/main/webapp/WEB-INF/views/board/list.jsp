@@ -15,7 +15,7 @@
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
 	<section class="container mt-5">
-		<h1 class="mb-3 text-center">Notice List</h1>
+		<h1 class="mb-3 text-center">${board} List</h1>
 		
 		<table class="table table-success table-sm">
 		<!-- Latest compiled and minified CSS -->
@@ -25,8 +25,8 @@
 			<tbody>
 				<c:forEach items="${requestScope.list}" var="d" varStatus="i"> 
 					<tr>
-						<td><a href="./detail?noticeNo=${d.num}">${d.num}</a></td>
-						<td><a href="./detail?noticeNo=${d.num}">${d.subject}</a></td>
+						<td><a href="./detail?num=${d.num}">${d.num}</a></td>
+						<td><a href="./detail?num=${d.num}">${d.subject}</a></td>
 						<td>${d.name}</td>
 						<td>${d.createDate}</td>
 						<td>${d.hit}</td>
@@ -57,7 +57,19 @@
 			  </ul>
 			</nav>
 		
-		
+		<div class="input-group mb-3">
+		 <form action="./list" method="get">
+			  <select name="kind" class="form-select" aria-label="Default select example">
+				  <option value="subject">Subject</option>
+				  <option value="contents">Contents</option>
+				  <option value="name">Name</option>
+			  </select>
+			  <input type="text" name="search" class="form-control" aria-label="Amount (to the nearest dollar)">
+			   <div class="col-auto">
+			    <button type="submit" class="btn btn-primary">검색</button>
+			  </div>
+		  </form>
+		</div>
 		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./add">글쓰기</a>
 		
 	
