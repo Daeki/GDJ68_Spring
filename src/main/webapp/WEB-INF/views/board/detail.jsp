@@ -44,7 +44,9 @@
 		</form>
 		
 		<form>
+			<c:if test="${board ne 'notice'}">
 			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
+			</c:if>
 			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
 			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
 		</form>

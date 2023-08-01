@@ -26,7 +26,12 @@
 				<c:forEach items="${requestScope.list}" var="d" varStatus="i"> 
 					<tr>
 						<td><a href="./detail?num=${d.num}">${d.num}</a></td>
-						<td><a href="./detail?num=${d.num}">${d.subject}</a></td>
+						<td><a href="./detail?num=${d.num}">
+						
+						<c:catch>
+						<c:forEach begin="1" end="${d.depth}">--</c:forEach>
+						</c:catch>
+						${d.subject}</a></td>
 						<td>${d.name}</td>
 						<td>${d.createDate}</td>
 						<td>${d.hit}</td>

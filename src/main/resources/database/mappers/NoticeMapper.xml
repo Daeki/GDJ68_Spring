@@ -56,13 +56,13 @@
   			)
   	</insert>
   	
-  	<select id="getDetail" resultType="NoticeDTO" parameterType="NoticeDTO">  
+  	<select id="getDetail" resultMap="getSelectResult" parameterType="NoticeDTO">  
   		SELECT 
   			* 
   		FROM
   			NOTICE
   		WHERE
-  			NOTICENO=#{noticeNo}
+  			NOTICENO=#{num}
   	</select>
   	
   	<delete id="setDelete" parameterType="NoticeDTO">

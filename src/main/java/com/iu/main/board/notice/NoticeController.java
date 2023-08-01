@@ -48,5 +48,13 @@ public class NoticeController {
 		return "redirect:./list";
 	}
 	
+	@RequestMapping(value = "detail", method = RequestMethod.GET)
+	public String setAdd(NoticeDTO noticeDTO, Model model)throws Exception{
+		BoardDTO boardDTO = noticeService.getDetail(noticeDTO);
+		System.out.println(boardDTO.getContents());
+		model.addAttribute("dto", boardDTO);
+		return "board/detail";
+	}
+	
 
 }
