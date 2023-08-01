@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.iu.main.board.BoardDTO;
+import com.iu.main.board.notice.NoticeDTO;
 import com.iu.main.util.Pager;
 
 @Controller
@@ -53,6 +54,25 @@ public class QnaController {
 		model.addAttribute("dto", boardDTO);
 		return "board/detail";
 	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String setUpdate(BoardDTO boardDTO, Model model)throws Exception{
+		boardDTO = qnaService.getDetail(boardDTO);
+		model.addAttribute("dto", boardDTO);
+		return "board/update";
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String setUpdate(NoticeDTO noticeDTO, MultipartFile[] photos, HttpSession session)throws Exception{
+		int result = qnaService.setUpdate(noticeDTO);
+		return "redirect:./list";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setAdd(QnaDTO qnaDTO)throws Exception{
+		int result =qnaService.setDelete(qnaDTO);
+		return "redirect:./list";
+	}	
 	
 	@RequestMapping(value = "reply", method = RequestMethod.GET)
 	public String setReply(Long num, Model model)throws Exception{

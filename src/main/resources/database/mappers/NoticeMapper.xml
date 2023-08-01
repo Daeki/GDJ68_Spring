@@ -26,6 +26,8 @@
 			R BETWEEN #{startRow} AND #{lastRow}
   	</select>
   	
+  	
+  	
   	<resultMap type="NoticeDTO" id="getSelectResult">
   		<id column="NOTICENO" property="num"/>
   		<result column="NOTICESUBJECT" property="subject"/>
@@ -33,6 +35,11 @@
   		<result column="NOTICECONTENTS" property="contents"/>
   		<result column="NOTICEDATE" property="createDate"/>
   		<result column="NOTICEHIT" property="hit"/>
+  		<collection property="dtos" javaType="List" ofType="NoticeFileDTO">
+  			<id column="FILENUM" property="fileNum"/>
+  			<result column="FILENAME" property="fileName"/>
+  			<result column="ORIGINALNAME" property="originalName"/>
+  		</collection>
   		
   	</resultMap>
   	
@@ -41,18 +48,17 @@
   		SELECT COUNT(NOTICENO) FROM NOTICE
   	</select>
   	
+  	<insert id="setFileAdd" parameterType="NoticeFileDTO">
+  		INSERT INTO NOTICEFILE
+  		VALUES (NOTICEFILE_SEQ.NEXTVAL,#{noticeNo}, #{fileName}, #{originalName} )
+  	</insert>
+  	
   	<insert id="setAdd" parameterType="NoticeDTO">
-  		INSERT 
-  		INTO 
-  			NOTICE 
-  		VALUES 
-  			(
-  				NOTICE_SEQ.NEXTVAL, 
-  				#{noticeSubject}, 
-  				#{noticeName}, 
-  				SYSDATE, 
-  				0, 
-  				#{noticeContents}
+  		<selectKey keyProperty="num" order="BEFORE" resultType="Long">
+  			SELECT NOTICE_SEQ.NEXTVAL FROM DUAL
+  		</selectKey>
+  		INSERT INTO	NOTICE 
+  		VALUES (#{num},	#{subject},	#{name},SYSDATE,0,#{contents}
   			)
   	</insert>
   	
@@ -60,26 +66,29 @@
   		SELECT 
   			* 
   		FROM
-  			NOTICE
+  			NOTICE N
+  			LEFT JOIN
+  			NOTICEFILE NF
+  			ON N.NOTICENO=NF.NOTICENO
   		WHERE
-  			NOTICENO=#{num}
+  			N.NOTICENO=#{num}
   	</select>
   	
   	<delete id="setDelete" parameterType="NoticeDTO">
   		DELETE 
   			NOTICE 
   		WHERE 
-  			NOTICENO=#{noticeNo}
+  			NOTICENO=#{num}
   	</delete>
   	
   	<update id="setUpdate" parameterType="NoticeDTO">
   		UPDATE 
   			NOTICE
   		SET 
-  			NOTICESUBJECT=#{noticeSubject},
-  			NOTICECONTENTS=#{noticeContents}
+  			NOTICESUBJECT=#{subject},
+  			NOTICECONTENTS=#{contents}
   		WHERE
-  			NOTICENO=#{noticeNo}
+  			NOTICENO=#{num}
   	</update>
   	
   	<update id="setHitCount">

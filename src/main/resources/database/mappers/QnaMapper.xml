@@ -51,13 +51,13 @@
 	  	</select>
 	  	
 	  	<select id="getDetail" parameterType="QnaDTO" resultMap="getSelectResult">
-	  		SELECT * FROM QNABOARD WHERE QNANUM=#{num}
-<!-- 	  		SELECT Q.*, QF.*
+	  		
+ 	  		SELECT Q.*, QF.*
 	  		FROM QNABOARD Q
 	  			 LEFT JOIN
 	  			 QNAFILE QF
 	  			 on Q.QNANUM=QF.QNANUM
-	  		WHERE Q.QNANUM=#{num} -->
+	  		WHERE Q.QNANUM=#{num}
 	  	</select>
   	
 	  	<resultMap type="QnaDTO" id="getSelectResult">
@@ -67,10 +67,22 @@
 	  		<result column="QNACONTENTS" property="contents"/>
 	  		<result column="QNADATE" property="createDate"/>
 	  		<result column="QNAHIT" property="hit"/>
-	  		
+	  		<result column="REF" property="ref"/>
+	  		<result column="STEP" property="step"/>
+	  		<result column="DEPTH" property="depth"/>
+	  		<collection property="dtos" javaType="List" ofType="QnaFileDTO">
+	  			<id column="FILENUM" property="fileNum"/>
+	  			<result column="FILENAME" property="fileName"/>
+	  			<result column="ORIGINALNAME" property="originalName"/>
+  			</collection>
 	  		
 	  		
 	  	</resultMap>
+	  	
+	  	<insert id="setFileAdd" parameterType="QnaFileDTO">
+  		INSERT INTO QNAFILE
+  		VALUES (NOTICEFILE_SEQ.NEXTVAL,#{qnaNum}, #{fileName}, #{originalName} )
+  	</insert>
 	  	
 	  	<insert id="setAdd" parameterType="QnaDTO">
 	  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
@@ -97,7 +109,22 @@
 	  		(#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, #{ref},#{step}, #{depth})
 	  	</insert>
 	  	
+	  	<update id="setUpdate" parameterType="QnaDTO">
+	  		UPDATE 
+	  			QNABOARD
+	  		SET 
+	  			QNASUBJECT=#{subject},
+	  			QNACONTENTS=#{contents}
+	  		WHERE
+	  			QNANUM=#{num}
+  		</update>
 	  	
+	  	<delete id="setDelete" parameterType="QnaDTO">
+	  		DELETE 
+	  			QNABOARD 
+	  		WHERE 
+	  			QNANUM=#{num}
+	  	</delete>
 	  	
 	  	
 	  	

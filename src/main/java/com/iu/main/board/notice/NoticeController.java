@@ -56,5 +56,26 @@ public class NoticeController {
 		return "board/detail";
 	}
 	
+	@RequestMapping(value = "update", method = RequestMethod.GET)
+	public String setUpdate(BoardDTO boardDTO, Model model)throws Exception{
+		boardDTO = noticeService.getDetail(boardDTO);
+		model.addAttribute("dto", boardDTO);
+		return "board/update";
+	}
+	
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String setUpdate(NoticeDTO noticeDTO, MultipartFile[] photos, HttpSession session)throws Exception{
+		int result = noticeService.setUpdate(noticeDTO);
+		return "redirect:./list";
+	}
+	
+	@RequestMapping(value = "delete", method = RequestMethod.GET)
+	public String setAdd(NoticeDTO noticeDTO)throws Exception{
+		int result =noticeService.setDelete(noticeDTO);
+		return "redirect:./list";
+	}	
+	
+	
+	
 
 }

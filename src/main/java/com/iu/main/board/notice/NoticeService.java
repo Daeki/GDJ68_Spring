@@ -46,7 +46,7 @@ public class NoticeService implements BoardService {
 				noticeFileDTO.setNoticeNo(boardDTO.getNum());
 				noticeFileDTO.setFileName(fileName);
 				noticeFileDTO.setOriginalName(file.getOriginalFilename());
-				//result=noticeDAO.setFileAdd(noticeFileDTO);
+				result=noticeDAO.setFileAdd(noticeFileDTO);
 			}
 		}
 		
@@ -57,13 +57,13 @@ public class NoticeService implements BoardService {
 	@Override
 	public int setUpdate(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return noticeDAO.setUpdate(boardDTO);
 	}
 
 	@Override
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
-		return 0;
+		return noticeDAO.setDelete(boardDTO);
 	}
 	
 	

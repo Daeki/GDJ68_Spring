@@ -14,43 +14,49 @@
 	
 	<section class="container mt-5">
 		<h1 class="mb-3 text-center">Detail Page</h1>
-		<form>
-				<h1>Subject : ${requestScope.dto.subject}</h1>
-			<table class="table table-success table-sm">
+		
+		<h1>Subject : ${requestScope.dto.subject}</h1>
+		<table class="table table-success table-sm">
 				
-				<thead>
-					<tr>
-						<td>번호</td><td>제목</td><td>이름</td><td>날짜</td><td>조회수</td>
-					</tr>
-				</thead>
-				<tbody>
-					<tr>
-						<td>${dto.num}</td>
-						<td>${dto.subject}</td>
-						<td>${dto.name}</td>
-						<td>${dto.createDate}</td>
-						<td>${dto.hit}</td>
-					</tr>
-				</tbody>
-			</table>
-			<table class="table table-success table-sm">
+			<thead>
 				<tr>
-					<td>내용</td>
+					<td>번호</td><td>제목</td><td>이름</td><td>날짜</td><td>조회수</td>
 				</tr>
+			</thead>
+			<tbody>
 				<tr>
-					<td>${dto.contents}</td>
+					<td>${dto.num}</td>
+					<td>${dto.subject}</td>
+					<td>${dto.name}</td>
+					<td>${dto.createDate}</td>
+					<td>${dto.hit}</td>
 				</tr>
-			</table>
-		</form>
+			</tbody>
+		</table>
+		<table class="table table-success table-sm">
+			<tr>
+				<td>내용</td>
+			</tr>
+			<tr>
+				<td>${dto.contents}</td>
+			</tr>
+		</table>
 		
-		<form>
-			<c:if test="${board ne 'notice'}">
-			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
-			</c:if>
-			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
-			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
-		</form>
+		<div>
+			<c:forEach items="${dto.dtos}" var="f">
+				<img src="../resources/upload/${board}/${f.fileName}">
+			</c:forEach>
+		</div>
 		
-</section>
+		
+		
+		<c:if test="${board ne 'notice'}">
+		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
+		</c:if>
+		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
+		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
+			
+		
+	</section>
 </body>
 </html>
