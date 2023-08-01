@@ -48,9 +48,23 @@ public class QnaController {
 	
 	@RequestMapping(value = "detail", method = RequestMethod.GET)
 	public String setAdd(QnaDTO qnaDTO, Model model)throws Exception{
-		model.addAttribute("dto", qnaDTO);
+		BoardDTO boardDTO = qnaService.getDetail(qnaDTO);
+		System.out.println(boardDTO.getContents());
+		model.addAttribute("dto", boardDTO);
 		return "board/detail";
 	}
+	
+	@RequestMapping(value = "reply", method = RequestMethod.GET)
+	public String setReply(Long num, Model model)throws Exception{
+		model.addAttribute("num", num);
+		return "board/reply";
+	}
+	
+	@RequestMapping(value = "reply", method = RequestMethod.POST)
+	public String setReply(QnaDTO qnaDTO, MultipartFile[] photos, HttpSession session)throws Exception{
+		int result = qnaService.setReplyAdd(qnaDTO, photos, session);
+		return "board/reply";
+	}	
 	
 
 }

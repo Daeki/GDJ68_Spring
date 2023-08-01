@@ -34,6 +34,7 @@ public class QnaService implements BoardService{
 	@Override
 	public BoardDTO getDetail(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
+		System.out.println(boardDTO.getNum());
 		return qnaDAO.getDetail(boardDTO);
 	}
 
@@ -68,6 +69,24 @@ public class QnaService implements BoardService{
 	public int setDelete(BoardDTO boardDTO) throws Exception {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+	
+	public int setReplyAdd(QnaDTO qnaDTO, MultipartFile [] files, HttpSession session) throws Exception{
+		BoardDTO parentDTO = new BoardDTO();
+		parentDTO.setNum(qnaDTO.getNum());
+		
+		parentDTO = qnaDAO.getDetail(parentDTO);
+		QnaDTO p = (QnaDTO)parentDTO;
+		qnaDTO.setRef(p.getRef());
+		qnaDTO.setStep(p.getStep()+1);
+		qnaDTO.setDepth(p.getDepth()+1);
+		
+		int result = qnaDAO.setStepUpdate(p);
+		
+		result = qnaDAO.setReplyAdd(qnaDTO);
+		System.out.println(result);
+		return result;
+		//file저장
 	}
 	
 	

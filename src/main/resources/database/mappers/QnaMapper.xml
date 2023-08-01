@@ -43,14 +43,14 @@
 					<include refid="searchSql"></include>
 						
 					ORDER BY 
-						QNANUM DESC
+						REF DESC, STEP ASC
 					) B
 				)
 			WHERE
 				R BETWEEN #{startRow} AND #{lastRow}
 	  	</select>
 	  	
-	  	<select id="getDetail" parameterType="QnaDTO" resultMap="QnaDTO">
+	  	<select id="getDetail" parameterType="QnaDTO" resultMap="getSelectResult">
 	  		SELECT * FROM QNABOARD WHERE QNANUM=#{num}
 <!-- 	  		SELECT Q.*, QF.*
 	  		FROM QNABOARD Q
@@ -80,6 +80,21 @@
 	  		INSERT INTO QNABOARD (QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
 	  		VALUES (#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, #{num}, 0, 0)
 	  	
+	  	</insert>
+	  	
+	  	<update id="setStepUpdate" parameterType="QnaDTO">
+	  		UPDATE QNABOARD SET STEP=STEP+1
+	  		WHERE REF=#{ref} AND STEP>#{step}
+	  	</update>
+	  	
+	  	<insert id="setReplyAdd" parameterType="QnaDTO">
+	  		<selectKey keyProperty="num" resultType="Long" order="BEFORE">
+	  			SELECT QNABOARD_SEQ.NEXTVAL FROM DUAL
+	  		</selectKey>
+	  		INSERT INTO QNABOARD 
+	  		(QNANUM, QNANAME, QNASUBJECT, QNACONTENTS, QNADATE, QNAHIT, REF, STEP, DEPTH)
+	  		VALUES
+	  		(#{num}, #{name}, #{subject}, #{contents}, sysdate, 0, #{ref},#{step}, #{depth})
 	  	</insert>
 	  	
 	  	

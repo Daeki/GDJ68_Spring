@@ -16,12 +16,12 @@
 	<form action="./login" method="post">
 	<div class="mb-3">
 	  <label for="id" class="form-label">ID</label>
-	  <input type="text" name="id" value="id123" class="form-control" id="id" placeholder="ID를 입력하세요">
+	  <input type="text" name="id" value="idx123" class="form-control" id="id" placeholder="ID를 입력하세요">
 	</div>
 	
 	<div class="mb-3">
 	  <label for="pw" class="form-label">PASSWORD</label>
-	  <input type="password" name="pw" value="pw1" class="form-control" id="pw" placeholder="PW를 입력하세요">
+	  <input type="password" name="pw" value="idx123" class="form-control" id="pw" placeholder="PW를 입력하세요">
 	</div>
 	
 	<div class="mb-3">

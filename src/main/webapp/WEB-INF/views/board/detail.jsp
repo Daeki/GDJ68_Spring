@@ -25,11 +25,11 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td>${requestScope.dto.num}</td>
-						<td>${requestScope.dto.subject}</td>
-						<td>${requestScope.dto.name}</td>
-						<td>${requestScope.dto.createDate}</td>
-						<td>${requestScope.dto.hit}</td>
+						<td>${dto.num}</td>
+						<td>${dto.subject}</td>
+						<td>${dto.name}</td>
+						<td>${dto.createDate}</td>
+						<td>${dto.hit}</td>
 					</tr>
 				</tbody>
 			</table>
@@ -38,15 +38,17 @@
 					<td>내용</td>
 				</tr>
 				<tr>
-					<td>${requestScope.dto.contents}</td>
+					<td>${dto.contents}</td>
 				</tr>
 			</table>
 		</form>
 		
 		<form>
+			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
 			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
 			<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
 		</form>
+		
 </section>
 </body>
 </html>

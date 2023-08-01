@@ -58,6 +58,15 @@ public class QnaDAO implements BoardDAO{
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	public int setReplyAdd(QnaDTO qnaDTO)throws Exception{
+		System.out.println("setReplyAdd");
+		return session.insert(NAMESPACE+"setReplyAdd", qnaDTO);
+	}
+	
+	public int setStepUpdate(QnaDTO qnaDTO)throws Exception{
+		return session.update(NAMESPACE +"setStepUpdate", qnaDTO);
+	}
 
 	
 	
