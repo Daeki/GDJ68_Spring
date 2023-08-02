@@ -54,9 +54,10 @@
 		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./reply?num=${dto.num}">답글</a>
 		</c:if>
 		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./update?num=${dto.num}">수정</a>
-		<a class="btn btn-outline-primary" for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
+		<a class="btn btn-outline-primary"  for="btn-check-outlined" href="./delete?num=${dto.num}">삭제</a>
+		<button id="del" class="btn btn-outline-primary"  for="btn-check-outlined" data-delete-name="num" data-delete-num="${dto.num}">삭제</button>
 			
-		
+		<script src="../resources/js/delete.js"></script>
 	</section>
 </body>
 </html>
