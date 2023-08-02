@@ -39,21 +39,11 @@
 				</div>
 				
 				<div id="fileList" class="my-5">
+				<c:forEach items="${dto.dtos}" var="f">
 					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
+						<input type="file" value="${f.originalName}" class="form-control" id="photos" name="photos">
 					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
+				</c:forEach>				
 	
 				</div>
 							
