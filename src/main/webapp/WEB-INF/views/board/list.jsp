@@ -44,17 +44,17 @@
 			  <ul class="pagination">
 			  	<c:if test="${pager.pre}">
 				    <li class="page-item">
-				      <a class="page-link" href="./list?page=${pager.startNum-1}" aria-label="Previous">
+				      <a class="page-link move" href="#" data-num="${pager.startNum-1}" aria-label="Previous">
 				        <span aria-hidden="true">&laquo;</span>
 				      </a>
 				    </li>
 			    </c:if>
 			    <c:forEach begin="${pager.startNum}" end="${pager.lastNum}" var="i">
-			    	<li class="page-item"><a class="page-link" href="./list?page=${i}">${i}</a></li>
+			    	<li class="page-item"><a class="page-link move" href="#" data-num="${i}">${i}</a></li>
 			    </c:forEach>
 			    <c:if test="${pager.next}">
 				    <li class="page-item">
-				      <a class="page-link" href="./list?page=${pager.lastNum+1}" aria-label="Next">
+				      <a class="page-link move" href="#" data-num="${pager.lastNum+1}" aria-label="Next">
 				        <span aria-hidden="true">&raquo;</span>
 				      </a>
 				    </li>
@@ -63,13 +63,15 @@
 			</nav>
 		
 		<div class="input-group mb-3">
-		 <form action="./list" method="get">
-			  <select name="kind" class="form-select" aria-label="Default select example">
-				  <option value="subject">Subject</option>
-				  <option value="contents">Contents</option>
-				  <option value="name">Name</option>
+		 <form action="./list" method="get" id="frm">
+		 	  <input type="hidden" value="${pager.page}" id="page" name="page">
+		 	  	
+			  <select name="kind" id="k" class="form-select" data-kind="${pager.kind}" aria-label="Default select example">
+				  <option class="kind" value="subject">Subject</option>
+				  <option class="kind" value="contents">Contents</option>
+				  <option class="kind" value="name">Name</option>
 			  </select>
-			  <input type="text" name="search" class="form-control" aria-label="Amount (to the nearest dollar)">
+			  <input type="text" name="search" value="${pager.search}" class="form-control" aria-label="Amount (to the nearest dollar)">
 			   <div class="col-auto">
 			    <button type="submit" class="btn btn-primary">검색</button>
 			  </div>
@@ -79,5 +81,10 @@
 		
 	
 	</section>
+
+	<script src="/resources/js/list.js"></script>
+	<script>
+		//setData('${pager.kind}');
+	</script>
 </body>
 </html>

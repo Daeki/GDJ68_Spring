@@ -21,15 +21,15 @@
 		</div>
 		
 		<div class="row justify-content-center my-4">
-			<form class="col-md-7" action="./add" method="post" enctype="multipart/form-data">
+			<form class="col-md-7" action="./add" method="post" id="frm" enctype="multipart/form-data">
 				<div class="mb-3">
 				  <label for="writer" class="form-label">작성자</label>
-				  <input type="text" name="name" readonly value="${member.id}" class="form-control" id="writer">
+				  <input type="text" name="name" readonly value="${member.id}" class="form-control" id="name">
 				</div>
 				
 				<div class="mb-3">
 				  <label for="title" class="form-label">제목</label>
-				  <input type="text" name="subject" class="form-control" id="title" placeholder="제목 입력">
+				  <input type="text" name="subject" class="form-control" id="subject" placeholder="제목 입력">
 				</div>
 		
 				<div class="mb-3">
@@ -57,11 +57,30 @@
 				</div>
 							
 				<div class="mb-3">
-					<button class="my btn btn-danger" type="submit">글쓰기</button>
+					<button class="my btn btn-danger" type="button" id="btn">글쓰기</button>
 				</div>
 			
 			</form>
 		</div>
 	</div>
+
+	<script>
+		const btn = document.getElementById("btn");
+		const subject = document.getElementById("subject");
+		const frm = document.getElementById("frm");
+
+		btn.addEventListener("click", function(){
+			console.log(subject.value=="");
+			console.log(subject.value.length == 0);
+			if(subject.value==""){
+				alert('제목은 필수 입니다.');
+				subject.focus();
+			}else {
+				frm.submit();
+			}
+		});
+
+	</script>
+
 </body>
 </html>
