@@ -13,9 +13,12 @@ let count=0;
 let idx=0;
 
 fileList.addEventListener("click", function(event){
+    console.log(event.target);
     let cl = event.target.classList;
     if(event.target.classList.contains("df")){
-        alert("delete");    
+        let deleteId = event.target.getAttribute("data-id");
+        document.getElementById(deleteId).remove();
+         count--;
     }
 })
 
@@ -35,7 +38,8 @@ add.addEventListener("click", function(){
     d.setAttributeNode(a);                      //<div class="input-group mb-3">
     a = document.createAttribute("id");
     a.value="file"+idx;
-    idx++;
+    d.setAttributeNode(a);
+   
     //input
     let i = document.createElement("input");
     a = document.createAttribute("type");
@@ -62,8 +66,12 @@ add.addEventListener("click", function(){
     s.setAttributeNode(a);
     s.appendChild(t);
 
+    a = document.createAttribute("data-id");
+    a.value="file"+idx;
+
+    s.setAttributeNode(a);
     d.appendChild(s);
 
     fileList.appendChild(d);
-
+    idx++;
 })
