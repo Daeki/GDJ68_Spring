@@ -37,24 +37,11 @@
 				  <textarea name="contents" class="form-control" id="contents" placeholder="내용 입력" rows="7"></textarea>
 				</div>
 				
-				<div id="fileList" class="my-5">
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>
-					<div class="input-group mb-3">
-						<input type="file" class="form-control" id="photos" name="photos">
-					</div>					
-	
+				<div class="mb-3">
+					<button type="button" class="btn btn-primary" id="add">File추가</button>
 				</div>
+				
+				<div id="fileList" class="my-5"></div>
 							
 				<div class="mb-3">
 					<button class="my btn btn-danger" type="button" id="btn">글쓰기</button>
@@ -63,7 +50,7 @@
 			</form>
 		</div>
 	</div>
-
+	<script src="../resources/js/file.js"></script>
 	<script>
 		const btn = document.getElementById("btn");
 		const subject = document.getElementById("subject");
