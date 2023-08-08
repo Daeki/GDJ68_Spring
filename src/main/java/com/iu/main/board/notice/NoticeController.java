@@ -30,8 +30,8 @@ public class NoticeController {
 	}
 	
 	@GetMapping("fileDelete")
-	public String setFileDelete(NoticeFileDTO noticeFileDTO, Model model)throws Exception{
-		int result = noticeService.setFileDelete(noticeFileDTO);
+	public String setFileDelete(NoticeFileDTO noticeFileDTO, HttpSession session ,Model model)throws Exception{
+		int result = noticeService.setFileDelete(noticeFileDTO, session);
 		model.addAttribute("result", result);
 		return "commons/ajaxResult";
 		
@@ -90,7 +90,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	public String setUpdate(NoticeDTO noticeDTO, MultipartFile[] photos, HttpSession session)throws Exception{
-		int result = noticeService.setUpdate(noticeDTO);
+		int result = noticeService.setUpdate(noticeDTO, photos, session);
 		return "redirect:./list";
 	}
 	

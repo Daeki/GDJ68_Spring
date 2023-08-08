@@ -19,6 +19,7 @@ for(del of delets){
                     if(r.trim()=='1'){
                         console.log(this.previousSibling.previousSibling.remove());
                         this.remove();
+                        count--;
                     }
 
                  })
@@ -32,6 +33,11 @@ for(del of delets){
 
 let max=5;
 let count=0;
+if(delets != null){
+    count=delets.length;
+    alert(count);
+}
+
 let idx=0;
 
 fileList.addEventListener("click", function(event){

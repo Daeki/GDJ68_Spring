@@ -121,6 +121,10 @@
 	<delete id="setFileDelete" parameterType="NoticeFileDTO">
 		DELETE NOTICEFILE WHERE FILENUM=#{fileNum}
 	</delete>
+	
+	<select id="getFileDetail" parameterType="NoticeFileDTO" resultType="NoticeFileDTO">
+		SELECT FILENUM, FILENAME FROM NOTICEFILE WHERE FILENUM=#{fileNum}
+	</select>
 
 
   </mapper>
