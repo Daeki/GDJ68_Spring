@@ -72,11 +72,13 @@
 	
 	</section>
 	
+	<button id="list">GetList</button>
+	
 <%-- 	
 	<c:forEach begin="1" end="10" step="2" var="num">
 		<h1>${num}</h1>
 	</c:forEach>
 	 --%>
-
+	<script type="text/javascript" src="../resources/js/bookList.js"></script>
 </body>
 </html>

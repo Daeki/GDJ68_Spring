@@ -21,6 +21,10 @@ public class MemberService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public MemberDTO getIdCheck(MemberDTO memberDTO)throws Exception{
+		return memberDAO.getIdCheck(memberDTO);
+	}
+	
 	public int setJoin(MemberDTO memberDTO, MultipartFile multipartFile, HttpSession session)throws Exception{
 		String path="/resources/upload/member/";
 		
