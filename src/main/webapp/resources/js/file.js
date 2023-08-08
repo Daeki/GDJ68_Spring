@@ -4,6 +4,10 @@
 
 const add = document.getElementById("add");
 const fileList = document.getElementById("fileList");
+const delets = document.getElementsByClassName("delets");
+
+//-------------------------------
+
 
 
 

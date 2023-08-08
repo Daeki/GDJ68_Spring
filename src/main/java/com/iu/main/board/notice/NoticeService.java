@@ -39,9 +39,11 @@ public class NoticeService implements BoardService {
 		String path="/resources/upload/notice/";
 		
 		int result = noticeDAO.setAdd(boardDTO);
+		
 		for(MultipartFile file:files) {
 			if(!file.isEmpty()) {
 				String fileName=fileManager.fileSave(path, session, file);
+				
 				NoticeFileDTO noticeFileDTO = new NoticeFileDTO();
 				noticeFileDTO.setNoticeNo(boardDTO.getNum());
 				noticeFileDTO.setFileName(fileName);
