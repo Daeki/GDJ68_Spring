@@ -37,15 +37,24 @@
 				  <label for="contents" class="form-label">내용</label>
 				  <textarea name="contents" class="form-control" id="contents" placeholder="내용 입력" rows="7">${dto.contents}</textarea>
 				</div>
+
+				<div class="mb-3">
+					<button type="button" class="btn btn-primary" id="add">File추가</button>
+				</div>
 				
 				<div id="fileList" class="my-5">
-				<c:forEach items="${dto.dtos}" var="f">
-					<div class="alert alert-danger" role="alert">
-						${f.originalName}
-					</div>
-					<span class="delets" data-delete-num="${f.fileNum}">X</span>
-				</c:forEach>				
+						
 	
+				</div>
+
+				<div>
+					<c:forEach items="${dto.dtos}" var="f">
+						<div class="alert alert-danger" role="alert">
+							${f.originalName}
+						</div>
+						<span class="delets" data-delete-num="${f.fileNum}">X</span>
+					</c:forEach>	
+
 				</div>
 							
 				<div class="mb-3">
@@ -55,5 +64,7 @@
 			</form>
 		</div>
 	</div>
+
+	<script src="/resources/js/file.js"></script>
 </body>
 </html>

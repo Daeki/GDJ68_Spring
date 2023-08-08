@@ -7,7 +7,25 @@ const fileList = document.getElementById("fileList");
 const delets = document.getElementsByClassName("delets");
 
 //-------------------------------
+for(del of delets){
+    del.addEventListener("click", function(){
+        let num = this.getAttribute("data-delete-num");
+        let check = confirm("삭제시 복구 불가");
 
+        if(check){
+            fetch("./fileDelete?fileNum="+num, {method:"get"})
+                .then((result)=>{return result.text()})
+                .then((r)=>{ 
+                    if(r.trim()=='1'){
+                        console.log(this.previousSibling.previousSibling.remove());
+                        this.remove();
+                    }
+
+                 })
+        }
+        
+    });
+}
 
 
 

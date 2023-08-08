@@ -117,6 +117,10 @@
 		WHERE
 			NOTICENO = #{noticeNo}
 	</update>
+	
+	<delete id="setFileDelete" parameterType="NoticeFileDTO">
+		DELETE NOTICEFILE WHERE FILENUM=#{fileNum}
+	</delete>
 
 
   </mapper>

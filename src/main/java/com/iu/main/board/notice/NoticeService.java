@@ -19,6 +19,10 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private FileManager fileManager;
+	
+	public int setFileDelete(NoticeFileDTO noticeFileDTO)throws Exception{
+		return noticeDAO.setFileDelete(noticeFileDTO);
+	}
 
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
