@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.iu.main.bankBook.comment.CommentDTO;
 import com.iu.main.util.Pager;
 
 @Controller
@@ -24,6 +26,14 @@ public class BankBookController {
 	@Autowired
 	private BankBookService bankBookService;
 	
+	//--- comment
+	@GetMapping("commentList")
+	public void getCommentList(CommentDTO commentDTO, Pager pager, Model model)throws Exception{
+		List<CommentDTO> ar = bankBookService.getCommentList(pager, commentDTO);
+		model.addAttribute("commentList", ar);
+	}
+	
+	//--- Bankbook
 	@RequestMapping(value="list", method = RequestMethod.GET)
 	public String getList(Pager pager, Model model)throws Exception{
 		List<BankBookDTO> ar = bankBookService.getList(pager);

@@ -33,13 +33,15 @@ for(del of delets){
 
 let max=5;
 let count=0;
+
+
 if(delets != null){
     count=delets.length;
     alert(count);
 }
 
 let idx=0;
-
+/*
 fileList.addEventListener("click", function(event){
     console.log(event.target);
     let cl = event.target.classList;
@@ -49,9 +51,17 @@ fileList.addEventListener("click", function(event){
          count--;
     }
 })
+*/
+$("#fileList").on("click", ".df", function(){
+    // let deleteId=$(this).attr("data-id")
+    // $("#"+deleteId).remove();
+    $(this).parent().remove();
+    count--;
+})
 
 
 
+/*
 add.addEventListener("click", function(){
 
     if(count>=max){
@@ -103,3 +113,22 @@ add.addEventListener("click", function(){
     fileList.appendChild(d);
     idx++;
 })
+*/
+
+//jquery로 변경
+$("#add").click(function(){
+    if(count>=max){
+        alert("최대 5개만 가능");
+        return;
+    }
+    count++;
+
+    let r = '<div class="input-group mb-3" id="file'+idx+'">'
+    r = r+'<input type="file" class="form-control" id="photos" name="photos">'
+    r = r+ '<span class="df" data-id="file'+idx+'">X</span>'
+    r= r+"</div>";
+    idx++;
+
+    $("#fileList").append(r);
+
+});

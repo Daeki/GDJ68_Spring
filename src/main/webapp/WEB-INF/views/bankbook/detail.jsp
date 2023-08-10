@@ -42,6 +42,25 @@
 	<a class="btn btn-primary" href="../bookAccount/add?bookNum=${dto.bookNum}">상품가입</a>
 	<button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#accountModal">상품가입</button>
 
+	<!-- 댓글 -->
+	<div>
+		<div class="mb-3">
+			<textarea name="accountPassword" class="form-control" id="comment"></textarea>
+			<button id="commentAdd">댓글등록</button>
+		</div>
+
+		<div>
+			<table id="commentList">
+				
+			</table>
+
+		</div>
+
+
+	</div>
+
+
+
 	<!-- Modal -->
 	<div class="modal fade" id="accountModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
@@ -79,17 +98,67 @@
 	</script> -->
 	
 	<script type="text/javascript">
-		const add = document.getElementById("add");
+	
+		getCommentList($("#add").attr("data-add-num"), 1)
 
-		add.addEventListener("click", function(){
-			let bookNum=add.getAttribute("data-add-num");
-			let pw = document.getElementById("pw").value;
-			//ajax1(bookNum, pw);
-			ajax2(bookNum,pw);
+		function getCommentList(bookNum, page){
+			$.ajax({
+				type:"get",
+				url: "./commentList",
+				data:{
+					bookNum:bookNum,
+					page:page
+				},
+				success:function(result){
+					$("#commentList").append(result);
+				},
+				error:function(){
+					alert("관리자에게 문의")
+				}
+			});
+		}
 
+
+
+		// const add = document.getElementById("add");
+
+		// add.addEventListener("click", function(){
+		// 	let bookNum=add.getAttribute("data-add-num");
+		// 	let pw = document.getElementById("pw").value;
+		// 	//ajax1(bookNum, pw);
+		// 	ajax2(bookNum,pw);
+
+		// });
+		alert(temp);	
+		$("#add").click(function(){
+			let bookNum=$("#add").attr("data-add-num");
+			let pw=$("#pw").val();
+			ajax3(bookNum, pw);
 		});
 
+		function ajax3(bookNum, pw){
+			$.ajax({
+				type:"get",
+				url:"../bookAccount/add",
+				data:{
+					bookNum:bookNum,
+					accountPassword:pw
+				},
+				success:function(response){
+					if(response.trim()>0){
+						alert("가입 성공");
+					}else {
+						alert("가입 실패");
+					}
+				},
+				error:function(){
+					alert("관리자에게 문의")
+				}
+			})
 
+		}
+
+/*
 		function ajax2(bookNum, pw){
 			fetch("../bookAccount/add", {
 				method:"post",
@@ -144,7 +213,7 @@
 				}
 			}
 		}
-	
+	*/
 	</script>
 
 </body>
