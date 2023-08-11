@@ -10,7 +10,9 @@
 
 	<c:import url="../temp/bootStrap.jsp"></c:import>
 
-
+	<!-- include summernote css/js-->
+   <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+   <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 </head>
 <body>
 	<c:import url="../temp/header.jsp"></c:import>
@@ -66,5 +68,9 @@
 	</div>
 
 	<script src="/resources/js/file.js"></script>
+	<script type="text/javascript">
+		$("#contents").summernote('code', "기존내용");
+		
+	</script>
 </body>
 </html>

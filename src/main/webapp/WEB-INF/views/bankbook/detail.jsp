@@ -119,6 +119,9 @@
 				success:function(result){
 					if(result.trim()>0){
 						alert('댓글등록 OK');
+						$("#commentList").empty();
+						$("#comment").val("");
+						pageNum=1;
 						getCommentList(bn, 1);
 					}
 
