@@ -34,6 +34,10 @@ public class BankBookService {
 		return bankBookDAO.getCommentList(map);
 	}
 	
+	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
+		return bankBookDAO.setCommentAdd(commentDTO);
+	}
+	
 	//--- Bankbook
 	public List<BankBookDTO> getList(Pager pager)throws Exception{
 //		Map<String, Integer> map = new HashMap<String, Integer>();

@@ -54,6 +54,10 @@
 				
 			</table>
 
+			<div id="more">
+				
+			</div>
+
 		</div>
 
 
@@ -98,8 +102,45 @@
 	</script> -->
 	
 	<script type="text/javascript">
-	
-		getCommentList($("#add").attr("data-add-num"), 1)
+		let bn=$("#add").attr("data-add-num");
+		let pageNum=1;
+		let tp=0;
+
+
+		$("#commentAdd").click(function(){
+			let contents =$("#comment").val();
+			$.ajax({
+				type:'POST',
+				url:'commentAdd',
+				data:{
+					bookNum:bn,
+					commentContents:contents
+				},
+				success:function(result){
+					if(result.trim()>0){
+						alert('댓글등록 OK');
+						getCommentList(bn, 1);
+					}
+
+				}
+			});
+
+
+
+		});
+
+		$("#more").on("click","#moreButton" ,function(){
+			
+			if(pageNum>=tp){
+				alert('마지막 페이지');
+				return;
+			}
+
+			pageNum++;
+			getCommentList(bn, pageNum);
+		})
+
+		getCommentList(bn, pageNum);
 
 		function getCommentList(bookNum, page){
 			$.ajax({
@@ -111,6 +152,10 @@
 				},
 				success:function(result){
 					$("#commentList").append(result);
+					tp=$("#totalPage").attr("data-totalPage");
+					let button = '<button id="moreButton">더보기('+pageNum+'/'+tp+')</button>'
+					console.log(result)
+					$("#more").html(button);
 				},
 				error:function(){
 					alert("관리자에게 문의")
@@ -129,7 +174,7 @@
 		// 	ajax2(bookNum,pw);
 
 		// });
-		alert(temp);	
+		
 		$("#add").click(function(){
 			let bookNum=$("#add").attr("data-add-num");
 			let pw=$("#pw").val();

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.iu.main.bankBook.comment.CommentDTO;
+import com.iu.main.member.MemberDTO;
 import com.iu.main.util.Pager;
 
 @Controller
@@ -29,8 +31,18 @@ public class BankBookController {
 	//--- comment
 	@GetMapping("commentList")
 	public void getCommentList(CommentDTO commentDTO, Pager pager, Model model)throws Exception{
+		pager.setPerPage(2L);
 		List<CommentDTO> ar = bankBookService.getCommentList(pager, commentDTO);
 		model.addAttribute("commentList", ar);
+	}
+	
+	@PostMapping("commentAdd")
+	public String setCommentAdd(CommentDTO commentDTO, HttpSession session, Model model)throws Exception{
+		MemberDTO memberDTO = (MemberDTO)session.getAttribute("member");
+		commentDTO.setId(memberDTO.getId());
+		int result= bankBookService.setCommentAdd(commentDTO);
+		model.addAttribute("result", result);
+		return "commons/ajaxResult";
 	}
 	
 	//--- Bankbook

@@ -28,6 +28,10 @@ public class BankBookDAO {
 		return sqlSession.selectList(NAMESPACE+"getCommentList", map);
 	}
 	
+	public int setCommentAdd(CommentDTO commentDTO)throws Exception{
+		return sqlSession.insert(NAMESPACE+"setCommentAdd", commentDTO);
+	}
+	
 	//------- BankBook
 	//total
 	public Long getTotal(Pager pager)throws Exception{
