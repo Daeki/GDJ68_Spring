@@ -116,14 +116,14 @@
 	  			QNASUBJECT=#{subject},
 	  			QNACONTENTS=#{contents}
 	  		WHERE
-	  			QNANUM=#{num}
+	  			QNANUM=#{num} AND QNANAME=#{name}
   		</update>
 	  	
 	  	<delete id="setDelete" parameterType="QnaDTO">
 	  		DELETE 
 	  			QNABOARD 
 	  		WHERE 
-	  			QNANUM=#{num}
+	  			QNANUM=#{num} AND QNANAME=#{name}
 	  	</delete>
 	  	
 	  	
