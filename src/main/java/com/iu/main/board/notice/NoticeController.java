@@ -30,6 +30,11 @@ public class NoticeController {
 		return "notice";
 	}
 	
+	@GetMapping("fileDown")
+	public void getFileDown(NoticeFileDTO noticeFileDTO)throws Exception{
+		
+	}
+	
 	@PostMapping("setContentsImgDelete")
 	public String setContentsImgDelete(String path, HttpSession session, Model model)throws Exception{
 		boolean check= noticeService.setContentsImgDelete(path, session);

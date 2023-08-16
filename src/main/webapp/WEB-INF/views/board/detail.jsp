@@ -44,7 +44,7 @@
 		
 		<div>
 			<c:forEach items="${dto.dtos}" var="f">
-				<img src="../resources/upload/${board}/${f.fileName}">
+				<a href="./fileDown?fileNum=${f.fileNum}">${f.originalName}</a>
 			</c:forEach>
 		</div>
 		

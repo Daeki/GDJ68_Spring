@@ -21,6 +21,10 @@ public class NoticeService implements BoardService {
 	@Autowired
 	private FileManager fileManager;
 	
+	public NoticeFileDTO getFileDown(NoticeFileDTO noticeFileDTO)throws Exception{
+		return noticeDAO.getFileDetail(noticeFileDTO);
+	}
+	
 	public boolean setContentsImgDelete(String path, HttpSession session)throws Exception{
 		//path: /resources/upload/notice/파일명
 		FileDTO fileDTO = new FileDTO();
