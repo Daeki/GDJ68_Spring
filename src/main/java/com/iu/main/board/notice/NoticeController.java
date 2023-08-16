@@ -31,14 +31,18 @@ public class NoticeController {
 	}
 	
 	@GetMapping("fileDown")
-	public void getFileDown(NoticeFileDTO noticeFileDTO)throws Exception{
+	public String getFileDown(NoticeFileDTO noticeFileDTO, Model model)throws Exception{
+		noticeFileDTO = noticeService.getFileDown(noticeFileDTO);
+		model.addAttribute("file", noticeFileDTO);
 		
+		return "fileManager";
 	}
 	
 	@PostMapping("setContentsImgDelete")
 	public String setContentsImgDelete(String path, HttpSession session, Model model)throws Exception{
 		boolean check= noticeService.setContentsImgDelete(path, session);
 		model.addAttribute("result", check);
+		
 		return "commons/ajaxResult";
 	}
 	
@@ -48,6 +52,7 @@ public class NoticeController {
 		System.out.println(files.getOriginalFilename());
 		String path = noticeService.setContentsImg(files, session);
 		model.addAttribute("result", path);
+		
 		return "commons/ajaxResult";
 		
 	}
