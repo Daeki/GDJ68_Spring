@@ -2,6 +2,7 @@ package com.iu.main.board.notice;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,8 @@ public class NoticeService implements BoardService {
 	private NoticeDAO noticeDAO;
 	@Autowired
 	private FileManager fileManager;
+	
+
 	
 	public NoticeFileDTO getFileDown(NoticeFileDTO noticeFileDTO)throws Exception{
 		return noticeDAO.getFileDetail(noticeFileDTO);
@@ -60,6 +63,8 @@ public class NoticeService implements BoardService {
 		// TODO Auto-generated method stub
 		pager.makeRowNum();
 		pager.makePageNum(noticeDAO.getTotal(pager));
+		
+		
 		return noticeDAO.getList(pager);
 	}
 

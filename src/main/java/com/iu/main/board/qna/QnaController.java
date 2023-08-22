@@ -86,5 +86,7 @@ public class QnaController {
 		return "board/reply";
 	}	
 	
+	
+	
 
 }

@@ -2,6 +2,7 @@ package com.iu.main.board.qna;
 
 import java.util.List;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,10 +23,12 @@ public class QnaService implements BoardService{
 	@Autowired
 	private FileManager fileManager;
 	
-
+	@Autowired
+	private ServletContext servletContext;
 	@Override
 	public List<BoardDTO> getList(Pager pager) throws Exception {
 		// TODO Auto-generated method stub
+		
 		pager.makeRowNum();
 		pager.makePageNum(qnaDAO.getTotal(pager));
 		return qnaDAO.getList(pager);
@@ -46,6 +49,7 @@ public class QnaService implements BoardService{
 		
 		for(MultipartFile file:files) {
 			if(!file.isEmpty()) {
+				
 				String fileName=fileManager.fileSave(path, session, file);
 				QnaFileDTO qnaFileDTO = new QnaFileDTO();
 				qnaFileDTO.setQnaNum(boardDTO.getNum());

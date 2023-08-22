@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -65,7 +66,7 @@ public class NoticeController {
 		
 	}
 	
-	@RequestMapping(value = "list", method = RequestMethod.GET)
+	@RequestMapping(value = "list", method = RequestMethod.POST)
 	public String getList(Pager pager, Model model)throws Exception{
 		List<BoardDTO> ar =  noticeService.getList(pager);
 		model.addAttribute("list", ar);
@@ -128,6 +129,20 @@ public class NoticeController {
 		return "redirect:./list";
 	}	
 	
+	
+	//--------------- Exception
+	
+//	@ExceptionHandler(NullPointerException.class)
+//	public String serverError()throws Exception{
+//		return "view name";
+//	}
+//	
+//	@ExceptionHandler(Exception.class)
+//	public String serverError2(Exception ex, Model model)throws Exception{
+//		ex.getMessage();
+//		return "view name";
+//	}
+//	
 	
 	
 

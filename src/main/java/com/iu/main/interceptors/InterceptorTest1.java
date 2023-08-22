@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-//@Component
+@Component
 public class InterceptorTest1 extends HandlerInterceptorAdapter{
 	
 	@Override
@@ -20,13 +20,13 @@ public class InterceptorTest1 extends HandlerInterceptorAdapter{
 		//return이 false면 거절
 		System.out.println("Controller 진입전");
 		
-		request.setAttribute("name", response);
-		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/../*.jsp");
-		view.forward(request, response);
+//		request.setAttribute("name", response);
+//		RequestDispatcher view = request.getRequestDispatcher("/WEB-INF/views/../*.jsp");
+//		view.forward(request, response);
 		
 		//response.sendRedirect(null);
 		
-		return false; 
+		return true; 
 	}
 	
 	@Override
@@ -42,5 +42,6 @@ public class InterceptorTest1 extends HandlerInterceptorAdapter{
 			throws Exception {
 		// TODO Auto-generated method stub
 		System.out.println("Jsp를 렌더링 후");
+
 	}
 }
